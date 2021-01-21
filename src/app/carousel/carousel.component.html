@@ -1,0 +1,24 @@
+<div class="carousel-container" *ngIf="show">
+  <div class="carousel">
+    <span (click)="onClose()" class="close-modal">
+      X
+    </span>
+
+    <ng-container *ngIf="photoDetail">
+      <span class="photo-detail">
+        author: {{photoDetail?.author}}
+      </span>
+      <ng-container *ngFor="let pic of apiImage.pictures; let i = index">
+        <img [src]="photoDetail.full_picture" class="slide" *ngIf="i === photoIndex" />
+      </ng-container>
+    </ng-container>
+
+    <!-- controls -->
+    <button class="control prev" (click)="onPreviousClick()">
+      <span class="arrow left"></span>
+    </button>
+    <button class="control next" (click)="onNextClick()">
+      <span class="arrow right"></span>
+    </button>
+  </div>
+</div>

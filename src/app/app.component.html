@@ -1,0 +1,22 @@
+<ng-container *ngIf="(appSandbox.imagesState$ | async)?.isLoading">
+  cargando imagenes
+</ng-container>
+
+<ng-container *ngIf="(appSandbox.imagesState$ | async)?.apiImage">
+  <div class="images-container">
+    <div *ngFor="let pic of (appSandbox.imagesState$ | async)?.apiImage.pictures; let i = index" (click)="openModal(i)">
+      <img src="{{pic.croppedPicture}}" alt="">
+    </div>
+  </div>
+
+  <div class="carousel-container" *ngIf="showModal">
+    <app-carousel (closeEvent)="closeEvent()" [photoIndex]="photoIndex" [show]="showModal" [apiImage]="(appSandbox.imagesState$ | async).apiImage"></app-carousel>
+  </div>
+
+  <div>
+    <span class="page-number"  *ngFor="let num of buildPagesArray()" [ngClass]="{'selected': num === (appSandbox.imagesState$ | async)?.apiImage.page}" (click)="clickPage(num)">
+      {{num}}
+    </span>
+  </div>
+</ng-container>
+
